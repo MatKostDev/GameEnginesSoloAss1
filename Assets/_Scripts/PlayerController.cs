@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public GameController gameController;
     public Transform bulletSpawn;
     public GameObject bullet;
-    public BulletPoolManager bulletPool;
 
     // private instance variables
     private AudioSource _thunderSound;
@@ -116,7 +115,7 @@ public class PlayerController : MonoBehaviour
             {
                 _bulletSound.Play();
 
-                GameObject newBullet = bulletPool.GetBullet();
+                GameObject newBullet = BulletPoolManager.Instance.GetBullet();
                 newBullet.transform.position = bulletSpawn.position;
             }
 

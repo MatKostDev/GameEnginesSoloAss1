@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// TODO: Bonus - make this class a Singleton!
 
 [System.Serializable]
 public class BulletPoolManager : MonoBehaviour
@@ -11,6 +10,25 @@ public class BulletPoolManager : MonoBehaviour
     public int numInitialBullets;
 
     Queue<GameObject> m_bulletQueue = new Queue<GameObject>();
+
+    private static BulletPoolManager s_instance = null;
+
+    public static BulletPoolManager Instance
+    {
+        get
+        {
+            if (s_instance == null)
+            {
+                s_instance = FindObjectOfType(typeof(BulletPoolManager)) as BulletPoolManager;
+
+                if (!s_instance)
+                {
+                    throw new NullReferenceException("YOU MUST CREATE A BULLET POOL MANAGER IN THE HIERARCHY!");
+                }
+            }
+            return s_instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +79,6 @@ public class BulletPoolManager : MonoBehaviour
     GameObject SpawnBullet(bool a_activate)
     {
         GameObject newBullet = Instantiate(bullet, transform);
-        newBullet.GetComponent<BulletController>().bulletPool = this;
 
         newBullet.SetActive(a_activate);
 

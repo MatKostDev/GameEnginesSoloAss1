@@ -7,7 +7,6 @@ public class BulletController : MonoBehaviour
 {
     public float bulletSpeed = 0.1f;
     public Boundary boundary;
-    public BulletPoolManager bulletPool;
 
     void Start()
     {
@@ -31,7 +30,7 @@ public class BulletController : MonoBehaviour
     {
         if (transform.position.y >= boundary.Top)
         {
-            bulletPool.ResetBullet(gameObject);
+            BulletPoolManager.Instance.ResetBullet(gameObject);
         }
     }
 }

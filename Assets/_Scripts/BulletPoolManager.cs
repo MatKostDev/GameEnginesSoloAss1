@@ -35,7 +35,6 @@ public class BulletPoolManager : MonoBehaviour
         else
         {
             myBullet = m_bulletQueue.Dequeue();
-            GetPoolSize();
             myBullet.SetActive(true);
         }
 
@@ -56,14 +55,11 @@ public class BulletPoolManager : MonoBehaviour
 
     public int GetPoolSize()
     {
-        Debug.Log(m_bulletQueue.Count);
         return m_bulletQueue.Count;
     }
 
     GameObject SpawnBullet(bool a_activate)
     {
-        GetPoolSize();
-
         GameObject newBullet = Instantiate(bullet, transform);
         newBullet.GetComponent<BulletController>().bulletPool = this;
 
